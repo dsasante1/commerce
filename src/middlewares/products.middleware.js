@@ -1,7 +1,14 @@
 const { runQuery } = require('../config/database.config');
 const { fetchProductsByName, getProductPrice } = require('../queries/products.queries');
-const responseHelper = require('../../helper/response')
-const { responseProvider} = responseHelper
+const responseProvider  = require('../../helper/response');
+
+
+
+
+// function responseProvider(res, data, message, code) {
+//   return res.status(code).json({ message, data });
+// }
+
 
 
 
