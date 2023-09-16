@@ -2,12 +2,6 @@ const responseProvider  = require('../../helper/response');
 
 
 
-// function responseProvider(res, data, message, code) {
-//   return res.status(code).json({ message, data });
-// }
-
-
-
 const checkProductInput = (req, res, next) => {
 
   try {

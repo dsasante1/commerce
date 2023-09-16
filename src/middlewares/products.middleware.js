@@ -3,15 +3,6 @@ const { fetchProductsByName, getProductPrice } = require('../queries/products.qu
 const responseProvider  = require('../../helper/response');
 
 
-
-
-// function responseProvider(res, data, message, code) {
-//   return res.status(code).json({ message, data });
-// }
-
-
-
-
 // check product availability
 const checkProductAvailability = async (req, res, next) => {
   try {
