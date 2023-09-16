@@ -1,6 +1,6 @@
-const checkTaskInput = (req, res, next) => {
+const checkProductInput = (req, res, next) => {
   try {
-    const { title, description } = req.body;
+    const { name, price, quantity } = req.body;
 
     if (!title) {
       return res.status(400).json({
@@ -26,5 +26,5 @@ const checkTaskInput = (req, res, next) => {
 };
 
 module.exports = {
-    checkTaskInput
+    checkProductInput
 }

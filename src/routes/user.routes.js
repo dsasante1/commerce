@@ -7,7 +7,7 @@ const {
   signInUser,
   fetchAllUsers,
   fetchUserById,
-} = require('../controllers/user.controller');
+} = require('../controllers/user.controllers');
 
 
 const { checkIfIdExists } = require('../middlewares/user.middleware');

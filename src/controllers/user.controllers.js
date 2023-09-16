@@ -1,12 +1,8 @@
-const UserService = require('../services/user.services');
+const UserService = require('../services/user.service');
 
-/**
- * Controller creating a new user
-  @param {} req
-  @param {} res
-  @param {} next
- * @returns JSON object as response data
- */
+
+
+//Controller creating a new user
 const createUser = async (req, res, next) => {
   try {
     const response = await UserService.createUser(req.body);
@@ -17,13 +13,12 @@ const createUser = async (req, res, next) => {
   }
 };
 
-/**
- * Controller for login user
-  @param {} req
-  @param {} res
-  @param {} next
- * @returns
- */
+
+
+
+
+//Login controller 
+
 const signInUser = async (req, res, next) => {
   try {
     const result = await UserService.loginUser(req.body);
@@ -33,13 +28,10 @@ const signInUser = async (req, res, next) => {
   }
 };
 
-/**
- * Returns all users
- * @param {Request} req
- * @param {Response} res
- * @param {object} next
- * @returns {JSON}
- */
+
+
+
+//Returns all users
 const fetchAllUsers = async (req, res, next) => {
   try {
     const result = await UserService.getAllUsers();
@@ -49,13 +41,11 @@ const fetchAllUsers = async (req, res, next) => {
   }
 };
 
-/**
- * Gets user by id
- * @param {Request} req
- * @param {Response} res
- * @param {object} next
- * @returns {JSON}
- */
+
+
+
+
+// Gets user by id
 const fetchUserById = async (req, res, next) => {
   try {
     const user = req.user;
