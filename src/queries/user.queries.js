@@ -1,9 +1,10 @@
 const addUser = `
  INSERT INTO users (
     email,
+    username,
     password
  )
- VALUES ($1, $2) RETURNING id, email, created_at
+ VALUES ($1, $2, $3) RETURNING id, username, email, created_at
 `;
 
 const findUserByEmail = `
