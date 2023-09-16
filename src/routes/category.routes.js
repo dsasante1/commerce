@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const { checkControllerInput } = require('../middlewares/validation.middleware');
 
+const { checkCategories, preventDuplicateCategories} = require('../middlewares/category.middleware')
+
 const {
     addCategory,
     getAllCategories,
@@ -11,13 +13,13 @@ const {
 
 
 // add a product category
-router.post('/', checkControllerInput, addCategory)
+router.post('/', checkControllerInput, preventDuplicateCategories,addCategory)
 
 // fetch all categories
 router.get('/all', getAllCategories)
 
 //get a category by its name
-router.get('/', checkControllerInput, getCategoryByName)
+router.get('/', checkControllerInput, checkCategories, getCategoryByName)
 
 
 

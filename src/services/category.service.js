@@ -15,10 +15,11 @@ const createCategory = async ( name ) => {
 
     const category = await runQuery(addCategory, [name])
 
+    console.log(typeof category)
 
     if(!category){
 
-      return provideResponse("failed", 400 , 'No product category!', null)
+      return provideResponse("failed", 400 , 'Adding Product category failed!', null)
     }
     
     return provideResponse("success", 201, 'Product category added successfully!', category)
@@ -31,7 +32,7 @@ const createCategory = async ( name ) => {
 // fetch categories
 const fetchAllCategories = async () => {
 
-    const { allCategory } = await runQuery(getAllCategory)
+    const  allCategory  = await runQuery(getAllCategory)
 
     if(!allCategory){
 
@@ -48,8 +49,7 @@ const fetchAllCategories = async () => {
 // get category by name
 const fetchCategoryByName = async (name) => {
     
-    const { categoryByName } = await runQuery(getCategoryByName, [name])
-    
+    const  categoryByName   = await runQuery(getCategoryByName, [name])
 
     if(!categoryByName){
 
