@@ -36,6 +36,7 @@ const getCategoryByName = async(req, res, next) => {
         const { name } = req.body
         
         const output = await fetchCategoryByName(name)
+        
         return res.status(output.code).json(output)
     }catch(error){
         next(error)

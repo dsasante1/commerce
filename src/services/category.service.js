@@ -6,21 +6,23 @@ const {
 
 const { runQuery } = require('../config/database.config')
 
+const { provideResponse } = require('../../helper/response');
 
 
 //add product category
+// unique categories no duplicates
 const createCategory = async ( name ) => {
 
     const category = await runQuery(addCategory, [name])
 
-    return {
-      status: 'success',
-      message: 'Product category added successfully!',
-      code: 201,
-      data: {
-        category,
-      },
-    };
+
+    if(!category){
+
+      return provideResponse("failed", 400 , 'No product category!', null)
+    }
+    
+    return provideResponse("success", 201, 'Product category added successfully!', category)
+
   };
 
 
@@ -29,31 +31,33 @@ const createCategory = async ( name ) => {
 // fetch categories
 const fetchAllCategories = async () => {
 
-    const allCategory = await runQuery(getAllCategory())
-    return {
-        status: 'success',
-        message: 'Product category fetched successfully!',
-        code: 201,
-        data: {
-          allCategory,
-        },
-      };
-    };
+    const { allCategory } = await runQuery(getAllCategory)
+
+    if(!allCategory){
+
+      return provideResponse("failed", 400 , 'No product category!', null)
+    }
+    
+    return provideResponse("success", 201, 'fetched product categories successfully!', allCategory)
+
+  };
 
 
 
 
 // get category by name
 const fetchCategoryByName = async (name) => {
-    const categoryByName = await runQuery(getCategoryByName, [name])
-    return {
-        status: 'success',
-        message: 'category fetched successfully!',
-        code: 201,
-        data: {
-          categoryByName,
-        },
-      };
+    
+    const { categoryByName } = await runQuery(getCategoryByName, [name])
+    
+
+    if(!categoryByName){
+
+      return provideResponse("failed", 400 , 'No product category matched your query!', null)
+    }
+    
+    return provideResponse("success", 201, 'category fetched successfully!', categoryByName)
+
     };
 
 module.exports = {

@@ -14,7 +14,7 @@ const {
 router.post('/', checkControllerInput, addCategory)
 
 // fetch all categories
-router.get('/', getAllCategories)
+router.get('/all', getAllCategories)
 
 //get a category by its name
 router.get('/', checkControllerInput, getCategoryByName)
