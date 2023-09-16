@@ -1,9 +1,7 @@
 const {
-
     addCategory,
     getAllCategory,
     getCategoryByName
-
 } = require('../queries/category.queries')
 
 const { runQuery } = require('../config/database.config')

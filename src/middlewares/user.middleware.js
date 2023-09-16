@@ -13,7 +13,7 @@ const checkIfIdExists = async (req, res, next) => {
         data: null,
       });
     }
-    console.log({ user })
+
     req.user = user;
     return next();
   } catch (error) {

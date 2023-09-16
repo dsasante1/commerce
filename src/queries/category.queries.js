@@ -1,3 +1,4 @@
+
 const addCategory = `
  INSERT INTO category (
    name
@@ -8,14 +9,14 @@ const addCategory = `
 
 const getAllCategory = `
 SELECT * FROM category
-`
+`;
 
 
-const getCategoryByName = `SELECT name FROM category WHERE name=$1`
+const getCategoryByName = `SELECT name FROM category WHERE name=$1`;
 
 
-module.exports = (
+module.exports = {
   addCategory,
   getAllCategory,
   getCategoryByName
-)
+}

@@ -10,6 +10,7 @@ const addCategory = async (req, res, next) => {
     try{
 
         const { name } = req.body
+
         const output = await createCategory(name)
         return res.status(output.code).json(output)
     }catch(error){

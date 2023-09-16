@@ -8,7 +8,6 @@ const createUser = async (req, res, next) => {
     const response = await UserService.createUser(req.body);
     return res.status(response.code).json(response);
   } catch (error) {
-    console.log({ error });
     next(error);
   }
 };
