@@ -1,7 +1,7 @@
 const {
     makeProduct,
     getAllProducts,
-    getProductsByCategory,
+    fetchProductsByCategory,
     buyAProduct
   } = require('../services/products.service');
   
@@ -39,8 +39,8 @@ const {
     //Gets products by category
   const getProductsByCategory = async (req, res, next) => {
     try {
-      const { id } = req.user;
-      const response = await getProductsByCategory(id);
+      const { name } = req.body;
+      const response = await fetchProductsByCategory(name);
       return res.status(response.code).json(response);
     } catch (error) {
       return next(error);
@@ -55,7 +55,7 @@ const {
   const buyProduct = async (req, res, next) => {
     try {
       const {name} = req.body;
-      const { id } = req.user;
+      
       const response = await buyAProduct(name);
       return res.status(response.code).json(response);
     } catch (error) {

@@ -8,7 +8,7 @@ const {
     createProduct,
     buyProduct,
     fetchAllProducts,
-    fetchProductsByCategory
+    getProductsByCategory
   } = require('../queries/products.queries');
   
   
@@ -50,8 +50,8 @@ const {
    
   
   //Gets products by category
-  const getProductsByCategory = async (id) => {
-    const result = await runQuery(fetchProductsByCategory, [id]);
+  const fetchProductsByCategory = async (name) => {
+    const result = await runQuery(getProductsByCategory, [name]);
     return {
       status: 'success',
       message: 'Products fetched successfully!',
@@ -86,7 +86,7 @@ const {
   module.exports = {
     makeProduct,
     getAllProducts,
-    getProductsByCategory,
+    fetchProductsByCategory,
     buyAProduct
   };
   

@@ -2,7 +2,6 @@ const {
     addUser,
     findUserByEmail,
     fetchAllUsers,
-    fetchUserById,
   } = require('../queries/user.queries');
   
   
@@ -117,6 +116,9 @@ const {
       },
     };
   };
+  
+
+
   
   module.exports = {
     createUser,

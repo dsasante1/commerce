@@ -29,40 +29,6 @@ const signInUser = async (req, res, next) => {
 };
 
 
-
-
-//Returns all users
-const fetchAllUsers = async (req, res, next) => {
-  try {
-    const result = await UserService.getAllUsers();
-    return res.status(result.code).json(result);
-  } catch (error) {
-    next(error);
-  }
-};
-
-
-
-
-
-// Gets user by id
-const fetchUserById = async (req, res, next) => {
-  try {
-    const user = req.user;
-    return res.status(200).json({
-      status: 'success',
-      message: 'User fetched successfully',
-      code: 200,
-      data: {
-        user,
-      },
-    });
-  } catch (error) {
-    console.log({ error });
-    next(error);
-  }
-};
-
 /*{
   status: 'success',
   message: 'Users fetched successfully',
@@ -74,6 +40,4 @@ const fetchUserById = async (req, res, next) => {
 module.exports = {
   createUser,
   signInUser,
-  fetchAllUsers,
-  fetchUserById,
 };

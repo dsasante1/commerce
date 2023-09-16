@@ -14,6 +14,7 @@ INSERT INTO products (
 `;
 
 
+
 //buy  a product and increase the
 //amount of products bought
 //user must be logged in
@@ -58,8 +59,20 @@ FROM products
 INNER JOIN category
 ON products.category_id = category.id
 
-WHERE products.category_id=$1`
+WHERE products.name=$1`
 
+
+
+
+const fetchProductsByName = `
+
+SELECT name FROM products WHERE products.name=$1
+`
+
+
+const getProductPrice = `
+SELECT price FROM products WHERE products.name=$1 
+`
 
 
 
@@ -67,7 +80,9 @@ module.exports = {
  createProduct,
  buyProduct,
  fetchAllProducts,
- fetchProductsByCategory
+ fetchProductsByCategory,
+ fetchProductsByName,
+ getProductPrice
 }
 
 

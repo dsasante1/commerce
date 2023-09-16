@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 const { checkToken } = require('../middlewares/auth.middleware');
 const { checkProductInput } = require('../middlewares/validation.middleware');
-const { checkIfIdExists } = require('../middlewares/user.middleware');  
-const { checkValidProduct } = require('../middlewares/product.middleware');
+const { checkCategories } = require('../middlewares/category.middleware');  
+const { checkProductAvailability, checkUserPrice } = require('../middlewares/products.middleware');
 
 
 const {
@@ -15,9 +15,21 @@ const {
 
 
 
-router.post('/', checkToken, checkProductInput, createProduct);
+// create a product
+router.post('/', checkProductInput, createProduct);
+
+
+// fetch all products
 router.get('/', fetchAllProducts);
-router.get('/user/:id', checkIfIdExists, getProductsByCategory,);
-router.post('/edit/:id', checkToken, checkProductInput, checkValidProduct,  buyProduct);
+
+// check if the product category exits
+// get all products of a particular category
+router.get('/user/:name', checkCategories, getProductsByCategory,);
+
+// check if the buyer has logged in
+// check the buyer input
+// check if the product is in stock
+// check the amount provided by the user.
+router.post('/buy/:id', checkToken, checkProductInput, checkProductAvailability,  checkUserPrice, buyProduct);
 
 module.exports = router;
