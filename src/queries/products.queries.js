@@ -68,12 +68,12 @@ WHERE products.name=$1`
 
 const fetchProductsByName = `
 
-SELECT name, quantity FROM products WHERE products.name=$1
+SELECT name, quantity FROM products WHERE name=$1
 `
 
 
 const getProductPrice = `
-SELECT price FROM products WHERE products.name=$1 
+SELECT price FROM products WHERE name=$1 
 `
 
 

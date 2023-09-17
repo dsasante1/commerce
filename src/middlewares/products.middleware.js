@@ -9,15 +9,16 @@ const checkProductAvailability = async (req, res, next) => {
   try {
     const { name, quantity } = req.body;
 
-    const [product = null, stockQuantity = null] = await runQuery(fetchProductsByName, [name]);
+    const [stockQuantity = null] = await runQuery(fetchProductsByName, [name]);
 
-    if (!product) {
+
+    if (!stockQuantity.name) {
 
       return responseProvider(res, null, 'Product out of stock!', 400)
 
     }
 
-    if (quantity > stockQuantity){
+    if (quantity > stockQuantity.quantity){
    
       return responseProvider(res, quantity, `your demand exceeds the number of items available for sale`, 400)
     }
@@ -34,9 +35,11 @@ const checkProductAvailability = async (req, res, next) => {
 const checkUserPrice = async (req, res, next) => {
 
   try{
-    const { price } = req.body
+    const { price, name } = req.body
 
-    const [productPrice = null] = await runQuery (getProductPrice, [price])
+    console.log("middle ware check price",price, name)
+
+    const [productPrice = null] = await runQuery (getProductPrice, [name])
 
     if (price < productPrice){
       return responseProvider(res, null, 'Chief didnt you see the price?', 400)

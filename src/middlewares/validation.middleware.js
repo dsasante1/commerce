@@ -90,7 +90,7 @@ const checkCreateCategoryInput = (req, res, next) => {
   try{
     const { name } = req.body;
 
-    if (!name) {
+    if (!name || typeof name !== 'string') {
       return responseProvider(res, null, 'provide a valid category name', 400)
     }
 
@@ -107,7 +107,7 @@ const checkCategoryIdInput = (req, res, next) => {
   try{
     const { id } = req.params;
 
-    if (!id) {
+    if (!id || typeof id !== 'number') {
       return responseProvider(res, null, 'provide a valid category id', 400)
     }
 

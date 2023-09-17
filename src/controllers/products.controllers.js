@@ -16,6 +16,8 @@ const {
 
       const { id } = req.params
 
+      
+
       const response = await makeProduct(name, price, quantity, id);
 
       return res.status(response.code).json(response);
@@ -59,9 +61,11 @@ const {
   
   const buyProduct = async (req, res, next) => {
     try {
-      const {name} = req.body;
+      const {name, quantity} = req.body;
+
+      console.log("controller buy", name, quantity)
       
-      const response = await buyAProduct(name);
+      const response = await buyAProduct(name, quantity);
       return res.status(response.code).json(response);
     } catch (error) {
       return next(error);

@@ -18,9 +18,9 @@ const {
 
   
    //Creates a new product in the db
-  const makeProduct = async (name, price, quantity ) => {
+  const makeProduct = async (name, price, quantity, id ) => {
 
-    const product = await runQuery(createProduct, [name, price, quantity]);
+    const product = await runQuery(createProduct, [name, price, quantity, id]);
 
     if(!product){
 
@@ -67,10 +67,11 @@ const {
 
 
   // Buy a product 
-  const buyAProduct = async (name) => {
+  const buyAProduct = async (name, quantity) => {
 
-      const result = await runQuery(buyProduct, [name]);
-    
+      const result = await runQuery(buyProduct, [name, quantity]);
+
+      console.log("service buy product", result)
     
       if(!result){
 
