@@ -40,16 +40,15 @@ const checkUserPrice = async (req, res, next) => {
 
 
     const [productPrice = null] = await runQuery (getProductPrice, [name])
-
-    console.log("check price", price, Number(productPrice.price))
     
-    if(!productPrice.price){
+    if(Number(productPrice.price)){
 
-    if (price < productPrice.price){
-      return responseProvider(res, null, 'Chief didnt you see the price?', 400)
-    }
+      if (price < Number(productPrice.price)){
+        return responseProvider(res, null, 'Chief you no see the price?', 400)
+      }
   
   }
+  
     return next()
 
   } catch (error) {
