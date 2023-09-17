@@ -37,7 +37,7 @@ router.get('/', fetchAllProducts);
 
 // check if the product category exits
 // get all products of a particular category
-router.get('/user/:id', checkCategoriesById, getProductsByCategory,);
+router.get('/types/:id', checkCategoriesById, getProductsByCategory);
 
 // check if the buyer has logged in
 // check the buyer input

@@ -71,8 +71,11 @@ const {
    
   
   //Gets products by category
-  const fetchProductsByCategory = async (name) => {
-    const result = await runQuery(getProductsByCategory, [name]);
+  const fetchProductsByCategory = async (id) => {
+
+    const result = await runQuery(getProductsByCategory, [id]);
+
+    console.log(result)
 
     if(!result){
 

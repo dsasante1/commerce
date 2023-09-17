@@ -63,6 +63,7 @@ const {
   const getProductsByCategory = async (req, res, next) => {
     try {
       const { id } = req.params;
+   
       const response = await fetchProductsByCategory(id);
       return res.status(response.code).json(response);
     } catch (error) {

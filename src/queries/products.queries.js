@@ -47,14 +47,17 @@ RETURNING name, price, quantity, quantity_sold
 // fetch all products including their category names
 const fetchAllProducts = `SELECT 
 products.name,
-product.price, 
+products.price, 
 products.quantity, 
-products.quantity_sold
+products.quantity_sold,
+category.name 
 
-FROM products
+FROM 
+products
+
 INNER JOIN category
 
-ON products.category_id=categories.id`
+ON products.category_id=category.id`
 
 
 
@@ -62,19 +65,19 @@ ON products.category_id=categories.id`
 
 
 //fetch product from one category
-const fetchProductsByCategory = `SELECT 
+const getProductsByCategory = `SELECT 
 products.name,
-product.price, 
+products.price, 
 products.quantity, 
 products.quantity_sold,
 category.name 
 
 FROM products
-
 INNER JOIN category
+
 ON products.category_id = category.id
 
-WHERE products.name=$1`
+WHERE products.category_id=$1`
 
 
 
@@ -95,7 +98,7 @@ module.exports = {
  createProduct,
  buyProduct,
  fetchAllProducts,
- fetchProductsByCategory,
+ getProductsByCategory,
  fetchProductsByName,
  getProductPrice,
  updateProductQuantity
