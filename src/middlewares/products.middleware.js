@@ -1,6 +1,6 @@
 const { runQuery } = require('../config/database.config');
 const { fetchProductsByName, getProductPrice } = require('../queries/products.queries');
-const responseProvider  = require('../../helper/response');
+const { responseProvider }  = require('../../helper/response');
 
 
 // check product availability

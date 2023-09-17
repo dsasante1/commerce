@@ -8,7 +8,7 @@ const addUser = `
 `;
 
 const findUserByEmail = `
- SELECT id, email, FROM users WHERE email=$1
+ SELECT id, email, password FROM users WHERE email=$1
 `
 
 const fetchAllUsers = `SELECT username, email FROM users`

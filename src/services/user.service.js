@@ -16,7 +16,9 @@ const {
   
   // create a user
   const createUser = async (body) => {
-    const { password, email } = body;
+    
+    const { password, username, email } = body;
+
     // Check if user already exist in db
     const userExist = await runQuery(findUserByEmail, [email]);
     if (userExist.length > 0) {
@@ -31,6 +33,7 @@ const {
     const hash = bcrypt.hashSync(password, saltRounds);
     const response = await runQuery(addUser, [
      email,
+     username,
       hash
     ]);
   
