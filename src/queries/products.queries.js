@@ -50,7 +50,7 @@ products.name AS product,
 products.price, 
 products.quantity, 
 products.quantity_sold,
-category.name 
+category.name AS category
 
 FROM 
 products
@@ -70,7 +70,7 @@ products.name AS product,
 products.price, 
 products.quantity, 
 products.quantity_sold,
-category.name 
+category.name AS category
 
 FROM products
 INNER JOIN category
