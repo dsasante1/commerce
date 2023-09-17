@@ -16,7 +16,7 @@ const {
 
 
 // create a product
-router.post('/', checkProductInput, createProduct);
+router.post('/:id', checkProductInput, createProduct);
 
 
 // fetch all products
@@ -24,7 +24,7 @@ router.get('/', fetchAllProducts);
 
 // check if the product category exits
 // get all products of a particular category
-router.get('/user/:name', checkCategories, getProductsByCategory,);
+router.get('/user/:id', checkCategories, getProductsByCategory,);
 
 // check if the buyer has logged in
 // check the buyer input

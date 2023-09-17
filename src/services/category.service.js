@@ -1,7 +1,8 @@
 const {
     addCategory,
     getAllCategory,
-    getCategoryByName
+    getCategoryByName,
+    getCategoryById
 } = require('../queries/category.queries')
 
 const { runQuery } = require('../config/database.config')
@@ -60,10 +61,29 @@ const fetchCategoryByName = async (name) => {
 
     };
 
+
+  const fetchCategoryById = async (id) => {
+    
+    const output = await runQuery(getCategoryById, [id])
+
+    if (!output){
+      return provideResponse("failed", 400 , 'No product category matched your query!', null)
+    }
+    
+    return provideResponse("success", 201, 'categories fetched successfully!', output)
+
+};
+
+
+
+
+
+
 module.exports = {
 
 createCategory,
 fetchAllCategories,
-fetchCategoryByName
+fetchCategoryByName,
+fetchCategoryById
 
 }

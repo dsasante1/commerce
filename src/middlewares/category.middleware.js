@@ -1,5 +1,5 @@
 const { runQuery } = require('../config/database.config')
-const { getCategoryByName } = require('../queries/category.queries')
+const { getCategoryByName, getCategoryById } = require('../queries/category.queries')
 const { responseProvider }  = require('../../helper/response');
 
 
@@ -50,7 +50,33 @@ const checkCategories = async (req, res, next) => {
 }
 
 
+
+const checkCategoriesById = async (req, res, next) => {
+
+  try {
+     
+    const { id } = req.params
+
+    const [ categoryId = null ] = await runQuery(getCategoryById, [id])
+
+    if (!categoryId){
+      return responseProvider(res, null, 'Invalid category!', 400)
+    }
+    
+    return next()
+
+  } catch (error) {
+
+    return next(error)
+  }
+}
+
+
+
+
+
 module.exports = {
   preventDuplicateCategories,
-  checkCategories
+  checkCategories,
+  checkCategoriesById
 }

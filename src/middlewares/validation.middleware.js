@@ -3,7 +3,7 @@ const  { responseProvider }  = require('../../helper/response');
 
 
 
-const checkUserInput = (req, res, next) => {
+const checkCreateUserInput = (req, res, next) => {
 
   try {
     const { email, username, password } = req.body;
@@ -30,9 +30,26 @@ const checkUserInput = (req, res, next) => {
 
 
 
+const checkUserLoginInput = (req, res, next) => {
+
+  try {
+    const { email, password } = req.body;
 
 
+    if (typeof email !== 'string' || !email.includes('@')) {
+      return responseProvider( res, null, 'provide a valid email', 400)
+    }
 
+
+    if (typeof password !== 'string' || password.length < 8) {
+      return responseProvider( res, null, 'provide a valid password', 400)
+    }
+
+    return next();
+  } catch (error) {
+    return next(error);
+  }
+};
 
 
 
@@ -68,7 +85,7 @@ const checkProductInput = (req, res, next) => {
 
 
 
-const checkControllerInput = (req, res, next) => {
+const checkCreateCategoryInput = (req, res, next) => {
   
   try{
     const { name } = req.body;
@@ -83,7 +100,31 @@ const checkControllerInput = (req, res, next) => {
   }
 }
 
+
+
+const checkCategoryIdInput = (req, res, next) => {
+  
+  try{
+    const { id } = req.params;
+
+    if (!id) {
+      return responseProvider(res, null, 'provide a valid category id', 400)
+    }
+
+    return next();
+  } catch (error) {
+    return next(error);
+  }
+}
+
+
+
+
+
 module.exports = {
-    checkProductInput,
-    checkControllerInput
+  checkCreateUserInput,  
+  checkUserLoginInput,
+  checkProductInput,
+  checkCreateCategoryInput,
+  checkCategoryIdInput
 }

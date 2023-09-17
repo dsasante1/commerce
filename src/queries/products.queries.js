@@ -9,8 +9,9 @@ const createProduct = `
 INSERT INTO products (
     name,
     price,
-    quantity
-) VALUES ($1, $2, $3) RETURNING *
+    quantity,
+   category_id 
+) VALUES ($1, $2, $3, $4) RETURNING *
 `;
 
 

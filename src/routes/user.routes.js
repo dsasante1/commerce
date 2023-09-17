@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+const { checkCreateUserInput, checkUserLoginInput} = require('../middlewares/validation.middleware')
+
 
 const {
   createUser,
@@ -8,7 +10,7 @@ const {
 } = require('../controllers/user.controllers');
 
 
-router.post('/signup', createUser);
-router.post('/login', signInUser);
+router.post('/signup', checkCreateUserInput, createUser);
+router.post('/login', checkUserLoginInput, signInUser);
 
 module.exports = router;

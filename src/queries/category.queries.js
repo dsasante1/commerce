@@ -15,8 +15,12 @@ SELECT * FROM category
 const getCategoryByName = `SELECT name FROM category WHERE name=$1`;
 
 
+const getCategoryById = `SELECT id, name FROM category WHERE id=$1`;
+
+
 module.exports = {
   addCategory,
   getAllCategory,
-  getCategoryByName
+  getCategoryByName,
+  getCategoryById
 }

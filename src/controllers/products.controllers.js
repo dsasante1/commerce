@@ -14,7 +14,9 @@ const {
       
       const { name, price, quantity } = req.body
 
-      const response = await makeProduct(name, price, quantity);
+      const { id } = req.params
+
+      const response = await makeProduct(name, price, quantity, id);
 
       return res.status(response.code).json(response);
     } catch (error) {
@@ -42,8 +44,8 @@ const {
     //Gets products by category
   const getProductsByCategory = async (req, res, next) => {
     try {
-      const { name } = req.body;
-      const response = await fetchProductsByCategory(name);
+      const { id } = req.params;
+      const response = await fetchProductsByCategory(id);
       return res.status(response.code).json(response);
     } catch (error) {
       return next(error);
