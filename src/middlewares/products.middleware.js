@@ -3,6 +3,7 @@ const { fetchProductsByName, getProductPrice } = require('../queries/products.qu
 const { responseProvider }  = require('../../helper/response');
 
 
+
 // check product availability
 // the quantity
 const checkProductAvailability = async (req, res, next) => {
@@ -37,14 +38,18 @@ const checkUserPrice = async (req, res, next) => {
   try{
     const { price, name } = req.body
 
-    console.log("middle ware check price",price, name)
 
     const [productPrice = null] = await runQuery (getProductPrice, [name])
 
-    if (price < productPrice){
+    console.log("check price", price, Number(productPrice.price))
+    
+    if(!productPrice.price){
+
+    if (price < productPrice.price){
       return responseProvider(res, null, 'Chief didnt you see the price?', 400)
     }
-
+  
+  }
     return next()
 
   } catch (error) {
@@ -53,7 +58,59 @@ const checkUserPrice = async (req, res, next) => {
 }
 
 
+
+// prevent duplicate products
+const preventDuplicateProducts = async (req, res, next) => {
+
+  try {
+
+    const { name } = req.body
+
+    const [ result = null ] = await runQuery(fetchProductsByName, [name.toLowerCase()])
+
+    if (result){
+        return responseProvider(res, null, 'Duplicate product: product already exists', 400)
+
+    }
+
+    
+    return next()
+  } catch (error) {
+    return next(error)
+  }
+
+}
+
+
+// prevent duplicate products
+const resupplyEmptyProducts = async (req, res, next) => {
+
+  try {
+
+    const { name } = req.body
+
+    const [ output = null ] = await runQuery(fetchProductsByName, [name.toLowerCase()])
+    
+
+    if (output.name && output.quantity > 1){
+        return responseProvider(res, null, 'Product in stock', 400)
+
+    }
+
+    
+    return next()
+  } catch (error) {
+    return next(error)
+  }
+
+}
+
+
+
+
 module.exports = {
   checkProductAvailability,
-  checkUserPrice
+  checkUserPrice,
+  preventDuplicateProducts, 
+  resupplyEmptyProducts 
 };

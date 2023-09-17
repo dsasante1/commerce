@@ -3,20 +3,33 @@ const router = express.Router();
 const { checkToken } = require('../middlewares/auth.middleware');
 const { checkProductInput } = require('../middlewares/validation.middleware');
 const { checkCategoriesById } = require('../middlewares/category.middleware');  
-const { checkProductAvailability, checkUserPrice } = require('../middlewares/products.middleware');
+
+
+const { 
+  checkProductAvailability, 
+  checkUserPrice, 
+  preventDuplicateProducts,
+  resupplyEmptyProducts 
+} = require('../middlewares/products.middleware');
 
 
 const {
   createProduct,
   fetchAllProducts,
   getProductsByCategory,
-  buyProduct
+  buyProduct,
+  supplyProducts
 } = require('../controllers/products.controllers');
 
 
 
 // create a product
-router.post('/:id', checkProductInput, createProduct);
+router.post('/:id', checkProductInput, preventDuplicateProducts, createProduct);
+
+
+//resupply sold out products
+router.put('/supply', resupplyEmptyProducts, supplyProducts)
+
 
 
 // fetch all products

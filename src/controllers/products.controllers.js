@@ -2,7 +2,8 @@ const {
     makeProduct,
     getAllProducts,
     fetchProductsByCategory,
-    buyAProduct
+    buyAProduct,
+    increaseProductQuantity
   } = require('../services/products.service');
   
 
@@ -16,7 +17,7 @@ const {
 
       const { id } = req.params
 
-      
+
 
       const response = await makeProduct(name, price, quantity, id);
 
@@ -27,6 +28,21 @@ const {
   };
   
 
+  //restock a product
+  const supplyProducts = async (req, res, next) => {
+    try {
+      
+      const { name, quantity, price } = req.body
+
+
+      const response = await increaseProductQuantity(name, quantity, price);
+
+      return res.status(response.code).json(response);
+    } catch (error) {
+      return next(error);
+    }
+  };
+  
 
 
 
@@ -62,8 +78,6 @@ const {
   const buyProduct = async (req, res, next) => {
     try {
       const {name, quantity} = req.body;
-
-      console.log("controller buy", name, quantity)
       
       const response = await buyAProduct(name, quantity);
       return res.status(response.code).json(response);
@@ -80,6 +94,7 @@ const {
     createProduct,
     fetchAllProducts,
     getProductsByCategory,
-    buyProduct
+    buyProduct,
+    supplyProducts
   };
   

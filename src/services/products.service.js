@@ -8,7 +8,8 @@ const {
     createProduct,
     buyProduct,
     fetchAllProducts,
-    getProductsByCategory
+    getProductsByCategory,
+    updateProductQuantity
   } = require('../queries/products.queries');
   
   
@@ -20,7 +21,7 @@ const {
    //Creates a new product in the db
   const makeProduct = async (name, price, quantity, id ) => {
 
-    const product = await runQuery(createProduct, [name, price, quantity, id]);
+    const product = await runQuery(createProduct, [name.toLowerCase(), price, quantity, id]);
 
     if(!product){
 
@@ -32,6 +33,24 @@ const {
   };
   
   
+
+    
+   //Creates a new product in the db
+   const increaseProductQuantity = async (name, quantity, price) => {
+
+    const product = await runQuery(updateProductQuantity, [name.toLowerCase(), quantity, price]);
+
+    if(!product){
+
+      return provideResponse("failed", 400 , ' Failed to update product  quantity!', null)
+    }
+    
+    return provideResponse("success", 201, 'Product quantity updated!', product)
+
+  };
+  
+
+
 
 
    //Fetches all products from the db
@@ -71,7 +90,6 @@ const {
 
       const result = await runQuery(buyProduct, [name, quantity]);
 
-      console.log("service buy product", result)
     
       if(!result){
 
@@ -90,6 +108,7 @@ const {
     makeProduct,
     getAllProducts,
     fetchProductsByCategory,
-    buyAProduct
+    buyAProduct,
+    increaseProductQuantity
   };
   

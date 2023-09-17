@@ -11,7 +11,8 @@ INSERT INTO products (
     price,
     quantity,
    category_id 
-) VALUES ($1, $2, $3, $4) RETURNING *
+) 
+VALUES ($1, $2, $3, $4) RETURNING *
 `;
 
 
@@ -21,11 +22,24 @@ INSERT INTO products (
 //user must be logged in
 const buyProduct = `
 UPDATE products
-SET quantity_sold = quantity_sold + $2 
-AND SET quantity = quantity - $2
+SET quantity_sold = quantity_sold + $2, 
+quantity = quantity - $2
 WHERE name=$1
-RETURNING *
+RETURNING name, price, quantity, quantity_sold
 `;
+
+
+
+
+
+// restock empty products
+const updateProductQuantity = `
+UPDATE products
+SET quantity=$2, price=$3
+WHERE name=$1
+RETURNING name, price, quantity, quantity_sold
+`
+
 
 
 
@@ -35,8 +49,7 @@ const fetchAllProducts = `SELECT
 products.name,
 product.price, 
 products.quantity, 
-products.quantity_sold,
-category.name
+products.quantity_sold
 
 FROM products
 INNER JOIN category
@@ -84,7 +97,8 @@ module.exports = {
  fetchAllProducts,
  fetchProductsByCategory,
  fetchProductsByName,
- getProductPrice
+ getProductPrice,
+ updateProductQuantity
 }
 
 
