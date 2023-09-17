@@ -15,7 +15,7 @@ const createCategory = async ( name ) => {
 
     const category = await runQuery(addCategory, [name])
 
-    console.log(typeof category)
+  
 
     if(!category){
 

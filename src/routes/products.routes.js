@@ -30,6 +30,6 @@ router.get('/user/:name', checkCategories, getProductsByCategory,);
 // check the buyer input
 // check if the product is in stock
 // check the amount provided by the user.
-router.post('/buy/:id', checkToken, checkProductInput, checkProductAvailability,  checkUserPrice, buyProduct);
+router.put('/buy', checkToken, checkProductInput, checkProductAvailability,  checkUserPrice, buyProduct);
 
 module.exports = router;

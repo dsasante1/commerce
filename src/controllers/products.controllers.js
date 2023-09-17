@@ -11,8 +11,11 @@ const {
   //Creates a product
   const createProduct = async (req, res, next) => {
     try {
-      const { id } = req.user;
-      const response = await makeProduct(req.body, id);
+      
+      const { name, price, quantity } = req.body
+
+      const response = await makeProduct(name, price, quantity);
+
       return res.status(response.code).json(response);
     } catch (error) {
       return next(error);
