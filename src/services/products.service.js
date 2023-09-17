@@ -52,15 +52,21 @@ const {
 
 
 
+// todo: response for empty lists
+// or results
+// before query failed
+
+// get the product name 
+
 
    //Fetches all products from the db
   const getAllProducts = async () => {
    
     const result = await runQuery(fetchAllProducts);
 
-    if(!result){
+    if(result.length === 0){
 
-      return provideResponse("failed", 400 , 'Fetching Product  failed!', null)
+      return provideResponse("success", 200 , 'sorry your query did not match any Product!', null)
     }
     
     return provideResponse("success", 201, 'Products fetched successfully!', result)
@@ -69,17 +75,21 @@ const {
   
   
    
-  
+  // todo: response for empty lists
+// or results
+// before query failed
+
+// get product name
+
+
   //Gets products by category
   const fetchProductsByCategory = async (id) => {
 
     const result = await runQuery(getProductsByCategory, [id]);
 
-    console.log(result)
+    if(result.length === 0){
 
-    if(!result){
-
-      return provideResponse("failed", 400 , 'Fetching Product  failed!', null)
+      return provideResponse("success", 200 , 'sorry your query did not match any Product!', null)
     }
     
     return provideResponse("success", 201, 'Products fetched successfully!', result)

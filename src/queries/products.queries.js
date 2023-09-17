@@ -46,7 +46,7 @@ RETURNING name, price, quantity, quantity_sold
 
 // fetch all products including their category names
 const fetchAllProducts = `SELECT 
-products.name,
+products.name AS product,
 products.price, 
 products.quantity, 
 products.quantity_sold,
@@ -66,7 +66,7 @@ ON products.category_id=category.id`
 
 //fetch product from one category
 const getProductsByCategory = `SELECT 
-products.name,
+products.name AS product,
 products.price, 
 products.quantity, 
 products.quantity_sold,
