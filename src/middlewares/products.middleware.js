@@ -4,16 +4,22 @@ const { responseProvider }  = require('../../helper/response');
 
 
 // check product availability
+// the quantity
 const checkProductAvailability = async (req, res, next) => {
   try {
-    const { name } = req.body;
+    const { name, quantity } = req.body;
 
-    const [product = null] = await runQuery(fetchProductsByName, [name]);
+    const [product = null, stockQuantity = null] = await runQuery(fetchProductsByName, [name]);
 
     if (!product) {
 
       return responseProvider(res, null, 'Product out of stock!', 400)
 
+    }
+
+    if (quantity > stockQuantity){
+   
+      return responseProvider(res, quantity, `your demand exceeds the number of items available for sale`, 400)
     }
 
     return next()

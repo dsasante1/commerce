@@ -20,7 +20,8 @@ INSERT INTO products (
 //user must be logged in
 const buyProduct = `
 UPDATE products
-SET quantity_sold = quantity_sold + 1
+SET quantity_sold = quantity_sold + $2 
+AND SET quantity = quantity - $2
 WHERE name=$1
 RETURNING *
 `;
@@ -66,7 +67,7 @@ WHERE products.name=$1`
 
 const fetchProductsByName = `
 
-SELECT name FROM products WHERE products.name=$1
+SELECT name, quantity FROM products WHERE products.name=$1
 `
 
 
