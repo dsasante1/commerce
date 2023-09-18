@@ -8,9 +8,11 @@ const SECRET = config.JWT_SECRET_KEY;
 
 const checkToken = (req, res, next) => {
   try {
-    const token = req.headers['authorization'].split(' ')[1];
 
-    if (!token) {
+    const { authorization } = req.headers
+
+
+    if (!authorization) {
       return res.status(400).json({
         status: 'error',
         code: 401,
@@ -19,6 +21,8 @@ const checkToken = (req, res, next) => {
       });
     }
     
+
+    const token = authorization.split(' ')[1];
 
     const user = jwt.verify(token, SECRET);
 
