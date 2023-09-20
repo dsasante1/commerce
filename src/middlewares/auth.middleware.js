@@ -20,7 +20,7 @@ const checkToken = (req, res, next) => {
         data: null,
       });
     }
-    
+
 
     const token = authorization.split(' ')[1];
 

@@ -20,7 +20,7 @@ const checkProductAvailability = async (req, res, next) => {
     }
 
     if (quantity > stockQuantity.quantity){
-   
+
       return responseProvider(res, quantity, `your demand exceeds the number of items available for sale`, 400)
     }
 
@@ -40,15 +40,15 @@ const checkUserPrice = async (req, res, next) => {
 
 
     const [productPrice = null] = await runQuery (getProductPrice, [name])
-    
+
     if(Number(productPrice.price)){
 
       if (price < Number(productPrice.price)){
         return responseProvider(res, null, 'Chief you no see the price?', 400)
       }
-  
+
   }
-  
+
     return next()
 
   } catch (error) {
@@ -72,7 +72,7 @@ const preventDuplicateProducts = async (req, res, next) => {
 
     }
 
-    
+
     return next()
   } catch (error) {
     return next(error)
@@ -89,14 +89,14 @@ const resupplyEmptyProducts = async (req, res, next) => {
     const { name } = req.body
 
     const [ output = null ] = await runQuery(fetchProductsByName, [name.toLowerCase()])
-    
+
 
     if (output.name && output.quantity > 1){
         return responseProvider(res, null, 'Product in stock', 400)
 
     }
 
-    
+
     return next()
   } catch (error) {
     return next(error)
@@ -110,6 +110,6 @@ const resupplyEmptyProducts = async (req, res, next) => {
 module.exports = {
   checkProductAvailability,
   checkUserPrice,
-  preventDuplicateProducts, 
-  resupplyEmptyProducts 
+  preventDuplicateProducts,
+  resupplyEmptyProducts
 };
